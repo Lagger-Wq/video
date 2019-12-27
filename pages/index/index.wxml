@@ -1,0 +1,14 @@
+<!--index.wxml-->
+<view style="padding:0" data-e="{{e}}" bindtouchstart="start" bindtouchend="end">
+  <swiper wx:if="{{!videoSrc}}" current="{{current}}" style="width:100%;height:200px;" circular="{{true}}" indicator-dots="{{true}}" autoplay="{{autoplay}}" data-e="{{e}}" bindchange="changeCurrent">
+    <view wx:for="{{info}}" wx:key="this">
+      <swiper-item>
+       <image src="{{item.img}}" style="width:100%;height:100%" mode='aspectFill' />
+       <image style="width:50px;height:50px;position:absolute;top:75px;left:161px" wx:if="{{item.type == 'video'}}" src='https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2024968985,1687368834&fm=26&gp=0.jpg' 
+       bindtap="play" data-item="{{item}}"/>
+      </swiper-item>
+    </view>
+  </swiper>
+  <!-- 视频的autoplay和controls属性要加上，不加有的安卓手机在缓冲的时候没有loading效果，我的手机是小米6x就出现了 -->
+  <video enable-progress-gesture="{{false}}" custom-catch="{{false}}" wx:if="{{videoSrc}}" style="width:100%;height:200px;position:absolute;top:0" autoplay="{{true}}" src="{{videoSrc}}" controls="controls" bindpause="handleStop" ></video>
+</view>
